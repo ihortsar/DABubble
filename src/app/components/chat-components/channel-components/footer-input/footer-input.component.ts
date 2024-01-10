@@ -44,7 +44,7 @@ export class FooterInputComponent {
   @ViewChild('contentContainer') contentContainer: ElementRef;
   @ViewChild('inputFooter', { static: true }) inputFooter: ElementRef;
   private storageRef;
-  public linkContent: string;
+  public linkContent
 
   async onFileSelected(event, input) {
     const metadata = {
@@ -154,7 +154,7 @@ export class FooterInputComponent {
    */
   addImageToMessage() {
     const currentMessage = this.sendMessageForm.value || '';
-    const updatedMessage = this.linkContent + currentMessage;
+    const updatedMessage = this.linkContent + '' + currentMessage;
     this.sendMessageForm.patchValue(updatedMessage);
   }
 
@@ -164,7 +164,7 @@ export class FooterInputComponent {
     this.newMessage.sender = this.userService.user.name;
     this.newMessage.profileImg = this.userService.user.profileImg;
     if (this.linkContent) {
-      this.newMessage.content = this.linkContent + this.sendMessageForm.value;
+      this.newMessage.content = this.linkContent + ' ' + this.sendMessageForm.value;
     } else {
       this.newMessage.content = this.sendMessageForm.value;
     }
@@ -189,6 +189,7 @@ export class FooterInputComponent {
       } else if (this.type === 'thread') {
         this.addMessageToThread();
       }
+      this.linkContent = ''
     }
   }
 
